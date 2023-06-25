@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from 'routes/Root'
 import Explore from 'components/Explore'
 import Saved from 'components/Saved'
+import Home from 'components/Home'
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     element: <Root />,
     //TODO errorPage
     children: [
+      { index: true, element: <Home /> },
       {
         path: '/explore-recipes',
         element: <Explore />

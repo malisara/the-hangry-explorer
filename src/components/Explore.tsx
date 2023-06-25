@@ -1,7 +1,7 @@
 type Props = {}
 
 function Explore({}: Props) {
-  return <div>Explore</div>
+  return <div>Explore Recipes</div>
 }
 
 export default Explore
