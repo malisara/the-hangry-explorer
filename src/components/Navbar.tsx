@@ -67,7 +67,7 @@ function Navbar({ navOnTop }: Props): JSX.Element {
             <button>
               <Bars3Icon
                 className="h-8"
-                data-testid="open-sidebar-icn"
+                data-testid="open-sidebar-btn"
                 onClick={() => setMobileNavOpen(!isMobileNavOpen)}
               />
             </button>
@@ -83,7 +83,7 @@ function Navbar({ navOnTop }: Props): JSX.Element {
           <button>
             <XMarkIcon
               className="h-8 float-right hover:text-pink-600"
-              data-testid="close-sidebar-icn"
+              data-testid="close-sidebar-btn"
               onClick={() => setMobileNavOpen(!isMobileNavOpen)}
             />
           </button>

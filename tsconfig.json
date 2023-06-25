@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src", "tests/components/Navbar.test.tsx"],
   "exclude": ["node_modules"]
 }
