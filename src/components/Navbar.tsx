@@ -6,27 +6,29 @@ import LogoPink from '../assets/LogoPink.png'
 import LogoWhite from '../assets/LogoWhite.png'
 import useMediaQuery from 'hooks/useMediaQuery'
 
-type Props = { navOnTop: boolean }
+type Props = {
+  transparentNav: boolean
+  onClick: () => void
+}
 
-function Navbar({ navOnTop }: Props): JSX.Element {
+function Navbar({ transparentNav, onClick }: Props): JSX.Element {
   const isDesktop = useMediaQuery('(min-width: 1060px)')
   const [isMobileNavOpen, setMobileNavOpen] = useState<boolean>(false)
 
-  const navbarBg = navOnTop
-    ? //TODO text-white or logo punk-300
-      'bg-transparent text-pink-300'
+  const navbarBg = transparentNav
+    ? 'bg-transparent text-pink-100'
     : 'bg-pink-200 drop-shadow'
-  const navbarTextColor = navOnTop
+  const navbarTextColor = transparentNav
     ? 'hover:text-pink-200'
     : 'hover:text-pink-600'
 
   return (
-    <nav className="z-10 fixed top-0 w-full">
+    <nav className="z-10 fixed top-0 w-full" onClick={onClick}>
       <div
         className={`${navbarBg} flex text-lg items-center justify-between 
         px-10 py-1`}
       >
-        {navOnTop ? (
+        {transparentNav ? (
           <NavLink to="/">
             <img className="h-14" src={LogoWhite} alt="Logo White" />
           </NavLink>

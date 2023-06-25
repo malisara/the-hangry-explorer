@@ -1,14 +1,16 @@
 import { MemoryRouter } from 'react-router-dom'
-import { describe, test } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
+import { describe, test, vi } from 'vitest'
 
 import Navbar from '../../src/components/Navbar'
 
+const onClickMock = vi.fn()
+
 describe('Desktop navbar', () => {
-  test("renders white logo when 'navOnTop' is true", () => {
+  test("renders white logo when 'transparentNav' is true", () => {
     render(
       <MemoryRouter>
-        <Navbar navOnTop={true} />
+        <Navbar transparentNav={true} onClick={onClickMock} />
       </MemoryRouter>
     )
     const whiteLogo = screen.getByAltText('Logo White')
@@ -17,10 +19,10 @@ describe('Desktop navbar', () => {
     expect(pinkLogo).not.toBeInTheDocument()
   })
 
-  test("renders pink logo when 'navOnTop' is false", () => {
+  test("renders pink logo when 'transparentNav' is false", () => {
     render(
       <MemoryRouter>
-        <Navbar navOnTop={false} />
+        <Navbar transparentNav={false} onClick={onClickMock} />
       </MemoryRouter>
     )
     const pinkLogo = screen.getByAltText('Logo Pink')
@@ -34,7 +36,7 @@ describe('Mobile navbar', () => {
   test('mobile sidebar is closed by default', () => {
     render(
       <MemoryRouter>
-        <Navbar navOnTop={true} />
+        <Navbar transparentNav={true} onClick={onClickMock} />
       </MemoryRouter>
     )
     const closeSidebarBtnBeforeClick = screen.queryByTestId('close-sidebar-btn')
@@ -50,7 +52,7 @@ describe('Mobile navbar', () => {
   test("opens sidebar when 'open-sidebar-btn- is clicked", () => {
     render(
       <MemoryRouter>
-        <Navbar navOnTop={true} />
+        <Navbar transparentNav={true} onClick={onClickMock} />
       </MemoryRouter>
     )
 
@@ -64,7 +66,7 @@ describe('Mobile navbar', () => {
   test("closes sidebar when 'close-sidebar-btn- is clicked", () => {
     render(
       <MemoryRouter>
-        <Navbar navOnTop={true} />
+        <Navbar transparentNav={true} onClick={onClickMock} />
       </MemoryRouter>
     )
 

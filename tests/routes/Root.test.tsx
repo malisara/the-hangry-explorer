@@ -16,7 +16,7 @@ describe('Root layout', () => {
 
     const footer = screen.getByText('The Hangry Explorer')
     expect(footer).toBeInTheDocument()
-    const whiteLogo = screen.getByAltText('Logo White')
-    expect(whiteLogo).toBeInTheDocument()
+    const logo = screen.getByRole('img')
+    expect(logo).toBeInTheDocument()
   })
 })

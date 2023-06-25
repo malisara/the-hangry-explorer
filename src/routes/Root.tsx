@@ -7,6 +7,13 @@ type Props = {}
 
 function Root({}: Props): JSX.Element {
   const [navOnTop, setNavOnTop] = useState<boolean>(true)
+  let [isHomeRoute, setIsHomeRoute] = useState<boolean>(
+    location.pathname === '/'
+  )
+
+  function handleClick() {
+    setIsHomeRoute(location.pathname === '/')
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,11 +27,14 @@ function Root({}: Props): JSX.Element {
 
   return (
     <>
-      <Navbar navOnTop={navOnTop} />
+      <Navbar
+        transparentNav={isHomeRoute && navOnTop ? true : false}
+        onClick={handleClick}
+      />
       <Outlet />
 
       <footer
-        className="fixed bottom-0 h-10 w-full bg-pink-200 text-center 
+        className="fixed bottom-0 h-10 w-full bg-pink-200 text-center
       justify-center pt-2"
       >
         The Hangry Explorer
