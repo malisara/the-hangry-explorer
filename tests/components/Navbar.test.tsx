@@ -4,13 +4,11 @@ import { describe, test, vi } from 'vitest'
 
 import Navbar from '../../src/components/Navbar'
 
-const onClickMock = vi.fn()
-
 describe('Desktop navbar', () => {
   test("renders white logo when 'transparentNav' is true", () => {
     render(
       <MemoryRouter>
-        <Navbar transparentNav={true} onClick={onClickMock} />
+        <Navbar transparentNav={true} />
       </MemoryRouter>
     )
     const whiteLogo = screen.getByAltText('Logo White')
@@ -22,7 +20,7 @@ describe('Desktop navbar', () => {
   test("renders pink logo when 'transparentNav' is false", () => {
     render(
       <MemoryRouter>
-        <Navbar transparentNav={false} onClick={onClickMock} />
+        <Navbar transparentNav={false} />
       </MemoryRouter>
     )
     const pinkLogo = screen.getByAltText('Logo Pink')
@@ -36,7 +34,7 @@ describe('Mobile navbar', () => {
   test('mobile sidebar is closed by default', () => {
     render(
       <MemoryRouter>
-        <Navbar transparentNav={true} onClick={onClickMock} />
+        <Navbar transparentNav={true} />
       </MemoryRouter>
     )
     const closeSidebarBtnBeforeClick = screen.queryByTestId('close-sidebar-btn')
@@ -52,7 +50,7 @@ describe('Mobile navbar', () => {
   test("opens sidebar when 'open-sidebar-btn- is clicked", () => {
     render(
       <MemoryRouter>
-        <Navbar transparentNav={true} onClick={onClickMock} />
+        <Navbar transparentNav={true} />
       </MemoryRouter>
     )
 
@@ -66,7 +64,7 @@ describe('Mobile navbar', () => {
   test("closes sidebar when 'close-sidebar-btn- is clicked", () => {
     render(
       <MemoryRouter>
-        <Navbar transparentNav={true} onClick={onClickMock} />
+        <Navbar transparentNav={true} />
       </MemoryRouter>
     )
 

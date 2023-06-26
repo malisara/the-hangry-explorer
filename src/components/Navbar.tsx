@@ -8,10 +8,9 @@ import useMediaQuery from 'hooks/useMediaQuery'
 
 type Props = {
   transparentNav: boolean
-  onClick: () => void
 }
 
-function Navbar({ transparentNav, onClick }: Props): JSX.Element {
+function Navbar({ transparentNav }: Props): JSX.Element {
   const isDesktop = useMediaQuery('(min-width: 1060px)')
   const [isMobileNavOpen, setMobileNavOpen] = useState<boolean>(false)
 
@@ -23,7 +22,7 @@ function Navbar({ transparentNav, onClick }: Props): JSX.Element {
     : 'hover:text-pink-600'
 
   return (
-    <nav className="z-10 fixed top-0 w-full" onClick={onClick}>
+    <nav className="z-10 fixed top-0 w-full">
       <div
         className={`${navbarBg} flex text-lg items-center justify-between 
         px-10 py-1`}
@@ -41,7 +40,7 @@ function Navbar({ transparentNav, onClick }: Props): JSX.Element {
         {isDesktop ? (
           <div className="flex justify-start w-11/12 h-8">
             <NavLink
-              to="explore-recipes"
+              to="/explore-recipes"
               style={({ isActive }) => {
                 return {
                   color: isActive ? 'rgb(244 114 182)' : ''

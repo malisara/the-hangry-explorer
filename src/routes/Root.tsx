@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import Navbar from 'components/Navbar'
@@ -7,13 +7,15 @@ type Props = {}
 
 function Root({}: Props): JSX.Element {
   const [navOnTop, setNavOnTop] = useState<boolean>(true)
-  let [isHomeRoute, setIsHomeRoute] = useState<boolean>(
+  const location = useLocation()
+  //returns a new location whenever the URL changes
+  const [isHomeRoute, setIsHomeRoute] = useState<boolean>(
     location.pathname === '/'
   )
 
-  function handleClick() {
+  useEffect(() => {
     setIsHomeRoute(location.pathname === '/')
-  }
+  }, [location])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,10 +29,7 @@ function Root({}: Props): JSX.Element {
 
   return (
     <>
-      <Navbar
-        transparentNav={isHomeRoute && navOnTop ? true : false}
-        onClick={handleClick}
-      />
+      <Navbar transparentNav={isHomeRoute && navOnTop && true} />
       <Outlet />
 
       <footer
