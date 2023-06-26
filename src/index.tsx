@@ -7,9 +7,11 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from 'routes/Root'
+
 import Explore from 'components/Explore'
-import Saved from 'components/Saved'
 import Home from 'components/Home'
+import Saved from 'components/Saved'
+import { mealsLoader } from 'loaders/mealsLoader'
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       {
         path: '/explore-recipes',
-        element: <Explore />
+        element: <Explore />,
+        loader: mealsLoader
       },
 
       {
