@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
 import Title from './Title'
-import { Meal } from 'types/Meal'
+import { Meal } from '../types/Meal'
 
 type Props = {}
 
@@ -48,7 +48,7 @@ function Explore({}: Props) {
   }
 
   function resetSearchInput() {
-    fetchMealsByMainIngredient('')
+    setMeals(initialMeals)
     setSearchInput('')
     if (inputRef.current) {
       //to make sure ref has been assigned to input element (!== null)
@@ -82,6 +82,17 @@ function Explore({}: Props) {
           </button>
         </form>
       </div>
+
+      {/* display of search input */}
+      <div className="w-4/6 text-center m-auto text-3xl py-4">
+        {searchInput === '' ? (
+          <div>All recipes</div>
+        ) : (
+          <div>"{searchInput}"</div>
+        )}
+      </div>
+
+      {/* meals display */}
 
       {meals.length !== 0 ? (
         <div>TODO</div>
