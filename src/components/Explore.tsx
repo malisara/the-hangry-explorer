@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
 import Title from './Title'
 import { Meal } from '../types/Meal'
+import MealComponent from './MealComponent'
 
 type Props = {}
 
@@ -95,7 +96,7 @@ function Explore({}: Props) {
       {/* meals display */}
 
       {meals.length !== 0 ? (
-        <div>TODO</div>
+        <MealComponent meals={meals} />
       ) : (
         <div className="flex flex-col items-center">
           <div
