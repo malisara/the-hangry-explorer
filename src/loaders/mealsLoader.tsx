@@ -1,4 +1,4 @@
-import { Meal } from 'types/Meal'
+import { Meal } from '../types/Meal'
 
 //loads the data before the component is sent to the client
 export const mealsLoader = async (): Promise<Meal[]> => {
