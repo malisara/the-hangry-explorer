@@ -41,6 +41,8 @@ const meals = {
   ]
 }
 
+const emptyMeals = { meals: null }
+
 global.fetch = vi.fn()
 const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
 
