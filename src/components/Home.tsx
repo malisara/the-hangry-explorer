@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 
 import HeroImage from '../assets/HeroImage.png'
+import ExploreMealsBtn from './FindMealBtn'
 
 type Props = {}
 
@@ -65,15 +65,7 @@ function Home({}: Props): JSX.Element {
             tasty treats that satisfy your hunger and
             <span className="text-pink-400 text-2xl"> keep you smiling.</span>
           </div>
-
-          <button
-            className="text-lg border-2 border-pink-300 px-4 py-2 mt-12 
-          rounded-lg hover:bg-pink-400 text-pink-400 hover:text-white"
-          >
-            <Link to="/explore-recipes" className="block">
-              Find your new favourite meal!
-            </Link>
-          </button>
+          <ExploreMealsBtn />
         </div>
       </div>
     </>
