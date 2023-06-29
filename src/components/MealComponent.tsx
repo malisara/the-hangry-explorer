@@ -1,20 +1,19 @@
-import { useEffect, useState } from 'react'
-import { Meal } from 'types/Meal'
+import { useState } from 'react'
+
 import MealsDisplay from './MealsDisplay'
+import { Meal } from 'types/Meal'
+import { LS_KEY } from 'utils/constants'
+import { getSavedMealsIds } from 'utils/utils'
 
 type Props = {
   meals?: Meal[]
+  handleMealUnsave?: (mealId: string) => void
 }
 
-function MealComponent({ meals }: Props) {
-  const [savedMealsIds, setSavedMealsIds] = useState<string[]>([])
-  const savedMealsFromLocalStorage: string[] = JSON.parse(
-    localStorage.getItem('SAVED_MEALS') || '[]'
+function MealComponent({ meals, handleMealUnsave }: Props) {
+  const [savedMealsIds, setSavedMealsIds] = useState<string[]>(
+    getSavedMealsIds()
   )
-
-  useEffect(() => {
-    setSavedMealsIds(savedMealsFromLocalStorage)
-  }, [])
 
   const toggleMealSave = (mealId: string) => {
     const updatedSavedMeals = savedMealsIds.includes(mealId)
@@ -22,7 +21,11 @@ function MealComponent({ meals }: Props) {
       : [...savedMealsIds, mealId]
 
     setSavedMealsIds(updatedSavedMeals)
-    localStorage.setItem('SAVED_MEALS', JSON.stringify(updatedSavedMeals))
+    localStorage.setItem(LS_KEY, JSON.stringify(updatedSavedMeals))
+
+    if (handleMealUnsave !== undefined) {
+      handleMealUnsave(mealId)
+    }
   }
 
   return (

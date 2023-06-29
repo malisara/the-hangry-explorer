@@ -4,6 +4,7 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import { render, screen, fireEvent, cleanup } from '@testing-library/react'
 import { describe, test, vi } from 'vitest'
 
+import { emptyMeals } from '../constants'
 import Explore from '../../src/components/Explore'
 import { Meal } from '../../src/types/Meal'
 
@@ -40,8 +41,6 @@ const meals = {
     }
   ]
 }
-
-const emptyMeals = { meals: null }
 
 global.fetch = vi.fn()
 const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
@@ -117,7 +116,6 @@ describe('Explore component', () => {
   })
 
   test('displays reset search button when no meals are found', async () => {
-    const emptyMeals = { meals: null }
     render(<RouterProvider router={router} />)
 
     mockedFetch.mockResolvedValueOnce(createFetchResponse(emptyMeals))
@@ -142,7 +140,6 @@ describe('Explore component', () => {
   })
 
   test('search resets when clicking on "reset search" button', async () => {
-    const emptyMeals = { meals: null }
     render(<RouterProvider router={router} />)
 
     mockedFetch.mockResolvedValueOnce(createFetchResponse(emptyMeals))
