@@ -6,12 +6,12 @@ const container = document.getElementById('root') as HTMLDivElement
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Root from 'routes/Root'
+import Root from './routes/Root'
 
-import Explore from 'components/Explore'
-import Home from 'components/Home'
-import Saved from 'components/Saved'
-import { mealsLoader } from 'loaders/mealsLoader'
+import Explore from './components/Explore'
+import Home from './components/Home'
+import Saved from './components/Saved'
+import mealsLoader from './loaders/mealsLoader'
 
 const router = createBrowserRouter([
   {

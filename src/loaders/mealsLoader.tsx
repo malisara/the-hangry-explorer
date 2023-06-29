@@ -1,7 +1,7 @@
 import { Meal } from '../types/Meal'
 
 //loads the data before the component is sent to the client
-export const mealsLoader = async (): Promise<Meal[]> => {
+async function mealsLoader(): Promise<Meal[]> {
   try {
     const response = await fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?i=`
@@ -23,3 +23,5 @@ export const mealsLoader = async (): Promise<Meal[]> => {
     throw error
   }
 }
+
+export default mealsLoader
