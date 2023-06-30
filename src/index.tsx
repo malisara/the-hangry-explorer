@@ -15,12 +15,13 @@ import MealViewer from 'components/MealViewer'
 import mealsLoader from './loaders/mealsLoader'
 import savedMealsLoader from './loaders/savedMealsLoader'
 import singleMealLoader from 'loaders/singleMealLoader'
+import NotFound from 'components/NotFound'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    //TODO errorPage
+    errorElement: <NotFound />,
     children: [
       { index: true, element: <Home /> },
       {
