@@ -19,7 +19,10 @@ async function savedMealsLoader(): Promise<Meal[]> {
   return initialMeals
 }
 
-async function fetchOneMeal(mealId: string): Promise<Meal | undefined> {
+export async function fetchOneMeal(
+  mealId: string,
+  detailedDisplay?: boolean
+): Promise<Meal | undefined> {
   try {
     const response = await fetch(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
@@ -30,12 +33,17 @@ async function fetchOneMeal(mealId: string): Promise<Meal | undefined> {
 
       if (json.meals !== null) {
         const mealObj = json.meals[0]
-        const parsedMeal = new Meal(
-          mealObj.idMeal,
-          mealObj.strMeal,
-          mealObj.strMealThumb
-        )
-        return parsedMeal
+
+        if (detailedDisplay) {
+          return _getDetailedMeal(mealObj)
+        } else {
+          const parsedMeal = new Meal(
+            mealObj.idMeal,
+            mealObj.strMeal,
+            mealObj.strMealThumb
+          )
+          return parsedMeal
+        }
       } else {
         return undefined
       }
@@ -48,3 +56,35 @@ async function fetchOneMeal(mealId: string): Promise<Meal | undefined> {
 }
 
 export default savedMealsLoader
+
+function _getDetailedMeal(meal: any) {
+  const ingredients = []
+  const measures = []
+
+  for (const key in meal) {
+    if (key.startsWith('strIngredient')) {
+      if (_isNotEmpty(meal[key])) {
+        ingredients.push(meal[key])
+      }
+    }
+
+    if (key.startsWith('strMeasure')) {
+      if (_isNotEmpty(meal[key])) {
+        measures.push(meal[key])
+      }
+    }
+  }
+
+  return new Meal(
+    meal.idMeal,
+    meal.strMeal,
+    meal.strMealThumb,
+    meal.strInstructions,
+    ingredients,
+    measures
+  )
+}
+
+function _isNotEmpty(value: string): boolean {
+  return value !== undefined && value !== null && value.length > 0
+}

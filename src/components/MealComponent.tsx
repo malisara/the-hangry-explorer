@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import MealsDisplay from './MealsDisplay'
+import OneMealDisplay from './OneMealDisplay'
 import { Meal } from 'types/Meal'
 import { LS_KEY } from 'utils/constants'
 import { getSavedMealsIds } from 'utils/utils'
@@ -8,9 +9,10 @@ import { getSavedMealsIds } from 'utils/utils'
 type Props = {
   meals?: Meal[]
   handleMealUnsave?: (mealId: string) => void
+  oneMeal?: Meal
 }
 
-function MealComponent({ meals, handleMealUnsave }: Props) {
+function MealComponent({ meals, handleMealUnsave, oneMeal }: Props) {
   const [savedMealsIds, setSavedMealsIds] = useState<string[]>(
     getSavedMealsIds()
   )
@@ -28,15 +30,21 @@ function MealComponent({ meals, handleMealUnsave }: Props) {
     }
   }
 
-  return (
-    meals && (
-      <MealsDisplay
-        meals={meals}
+  return meals ? (
+    <MealsDisplay
+      meals={meals}
+      onMealToggle={toggleMealSave}
+      savedMeals={savedMealsIds}
+    />
+  ) : (
+    oneMeal && (
+      <OneMealDisplay
+        meal={oneMeal}
         onMealToggle={toggleMealSave}
         savedMeals={savedMealsIds}
       />
     )
-  ) //TODO else
+  )
 }
 
 export default MealComponent

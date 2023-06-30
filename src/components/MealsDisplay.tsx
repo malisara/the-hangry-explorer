@@ -23,15 +23,14 @@ function MealsDisplay({ meals, onMealToggle, savedMeals }: Props): JSX.Element {
     <>
       <div
         className="flex w-5/8 px-4 py-5 gap-7 flex-wrap 
-    justify-center flex-col md:flex-row"
+    justify-center flex-col md:flex-row mb-[4rem]"
       >
         {meals.slice(0, visibleMeals).map((meal) => (
           <div
             key={meal.idMeal}
             className="flex flex-col md:w-1/3 lg:w-1/4 2xl:w-1/5"
           >
-            <Link to={`/`} className="hover:opacity-80">
-              {/* todo */}
+            <Link to={`/meal/${meal.idMeal}`} className="hover:opacity-80">
               <img
                 src={meal.strMealThumb}
                 className="rounded-md hover:drop-shadow-lg"

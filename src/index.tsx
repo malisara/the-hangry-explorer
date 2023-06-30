@@ -11,8 +11,10 @@ import Root from './routes/Root'
 import Explore from './components/Explore'
 import Home from './components/Home'
 import Saved from './components/Saved'
+import MealViewer from 'components/MealViewer'
 import mealsLoader from './loaders/mealsLoader'
 import savedMealsLoader from './loaders/savedMealsLoader'
+import singleMealLoader from 'loaders/singleMealLoader'
 
 const router = createBrowserRouter([
   {
@@ -26,11 +28,17 @@ const router = createBrowserRouter([
         element: <Explore />,
         loader: mealsLoader
       },
-
       {
         path: '/saved-recipes',
         element: <Saved />,
         loader: savedMealsLoader
+      },
+      {
+        path: '/meal/:id',
+        element: <MealViewer />,
+        loader: ({ params }) => {
+          return singleMealLoader(params.id)
+        }
       }
     ]
   }
