@@ -4,9 +4,10 @@ import MealComponent from '../../src/components/MealComponent'
 import { MemoryRouter } from 'react-router-dom'
 import { expect } from 'vitest'
 
+import { detailMeal } from '../constants'
+import { Meal } from '../../src/types/Meal'
 import { LS_KEY } from '../../src/utils/constants'
 import localStorageMock from '../utils'
-import { Meal } from '../../src/types/Meal'
 
 const displayLimitMeals = 10
 const meals = [
@@ -84,5 +85,19 @@ describe('Meal component', () => {
     //second meal remains in the ls
     const remainingLsItem = JSON.parse(localStorage.getItem(LS_KEY) || '[]')[0]
     expect(remainingLsItem).toBe(meals[1].idMeal)
+  })
+
+  test("OneMealDisplay component renders when 'oneMeal' is sent as prop", async () => {
+    render(
+      <MemoryRouter>
+        <MealComponent oneMeal={detailMeal} />
+      </MemoryRouter>
+    )
+
+    const mealImages = await screen.findAllByRole('img')
+    expect(mealImages).toHaveLength(1)
+
+    const instructions = await screen.findByText('fake instructions')
+    expect(instructions).toBeInTheDocument()
   })
 })

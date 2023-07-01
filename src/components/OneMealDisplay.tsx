@@ -54,6 +54,7 @@ function OneMealDisplay({ meal, onMealToggle, savedMeals }: Props) {
 
               <button onClick={() => onMealToggle(meal.idMeal)}>
                 <HeartIcon
+                  data-testid={'heart-icon'}
                   className={`h-8 text-gray-400
                  hover:text-pink-300 inline ms-5
                  ${savedMeals.includes(meal.idMeal) && 'text-pink-600'}`}
