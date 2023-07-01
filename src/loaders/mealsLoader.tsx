@@ -8,7 +8,7 @@ async function mealsLoader(): Promise<Meal[]> {
     )
     if (response.ok) {
       const json = await response.json()
-      if (json.meals !== null) {
+      if (json.meals) {
         const parsedMeals = json.meals.map((mealObj: any) => {
           return new Meal(mealObj.idMeal, mealObj.strMeal, mealObj.strMealThumb)
         })

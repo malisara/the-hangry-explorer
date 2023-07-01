@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 
-type Props = {}
-
-function RecipeDoesntExist({}: Props) {
+function RecipeDoesntExist(): JSX.Element {
   return (
     <>
       <div className="mt-40 text-center text-pink-600 text-2xl">Oops!</div>

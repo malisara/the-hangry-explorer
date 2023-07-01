@@ -3,9 +3,7 @@ import { motion } from 'framer-motion'
 import HeroImage from '../assets/HeroImage.png'
 import ExploreMealsBtn from './FindMealBtn'
 
-type Props = {}
-
-function Home({}: Props): JSX.Element {
+function Home(): JSX.Element {
   return (
     <>
       <div className="relative w-screen h-screen top-0">

@@ -3,9 +3,7 @@ import { useEffect, useState } from 'react'
 
 import Navbar from 'components/Navbar'
 
-type Props = {}
-
-function Root({}: Props): JSX.Element {
+function Root(): JSX.Element {
   const [navOnTop, setNavOnTop] = useState<boolean>(true)
   const location = useLocation()
   //returns a new location whenever the URL changes
@@ -19,9 +17,7 @@ function Root({}: Props): JSX.Element {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY === 0) {
-        setNavOnTop(true)
-      } else setNavOnTop(false)
+      window.scrollY === 0 ? setNavOnTop(true) : setNavOnTop(false)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)

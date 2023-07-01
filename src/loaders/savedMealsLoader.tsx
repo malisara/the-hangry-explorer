@@ -31,7 +31,7 @@ export async function fetchOneMeal(
     if (response.ok) {
       const json = await response.json()
 
-      if (json.meals !== null) {
+      if (json.meals) {
         const mealObj = json.meals[0]
 
         if (detailedDisplay) {

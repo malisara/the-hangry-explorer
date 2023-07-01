@@ -6,9 +6,7 @@ import Title from './Title'
 import { Meal } from '../types/Meal'
 import MealComponent from './MealComponent'
 
-type Props = {}
-
-function Explore({}: Props) {
+function Explore(): JSX.Element {
   const initialMeals = (useLoaderData() as Meal[]) ?? []
   const [meals, setMeals] = useState<Meal[]>(initialMeals)
   const [searchInput, setSearchInput] = useState<string>('')
@@ -28,7 +26,7 @@ function Explore({}: Props) {
       )
       if (response.ok) {
         const json = await response.json()
-        if (json.meals !== null) {
+        if (json.meals) {
           const parsedMeals = json.meals.map((mealObj: any) => {
             return new Meal(
               mealObj.idMeal,

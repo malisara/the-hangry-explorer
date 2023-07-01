@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 
-type Props = {}
-
-function ExploreMealsBtn({}: Props): JSX.Element {
+function ExploreMealsBtn(): JSX.Element {
   return (
     <button
       className="text-lg border-2 border-pink-300 px-4 py-2 mt-12 

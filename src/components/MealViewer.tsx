@@ -4,9 +4,7 @@ import MealComponent from './MealComponent'
 import RecipeDoesntExist from './RecipeDoesntExist'
 import { Meal } from 'types/Meal'
 
-type Props = {}
-
-function MealViewer({}: Props) {
+function MealViewer(): JSX.Element {
   const meal = useLoaderData() as Meal
 
   return (

@@ -7,9 +7,7 @@ import Title from './Title'
 import { Meal } from '../types/Meal'
 import { getSavedMealsIds } from 'utils/utils'
 
-type Props = {}
-
-function Saved({}: Props): JSX.Element {
+function Saved(): JSX.Element {
   const initalSavedMeals = useLoaderData() as Meal[]
   const [meals, setMeals] = useState<Meal[]>(initalSavedMeals)
   const [savedMealsIds, setSavedMealsIds] = useState<string[]>(

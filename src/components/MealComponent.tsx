@@ -2,12 +2,13 @@ import { useState } from 'react'
 
 import MealsDisplay from './MealsDisplay'
 import OneMealDisplay from './OneMealDisplay'
+
 import { Meal } from 'types/Meal'
 import { LS_KEY } from 'utils/constants'
 import { getSavedMealsIds } from 'utils/utils'
 
 type Props = {
-  meals?: Meal[]
+  meals?: Meal[] //todo meals or meal jsx
   handleMealUnsave?: (mealId: string) => void
   oneMeal?: Meal
 }
