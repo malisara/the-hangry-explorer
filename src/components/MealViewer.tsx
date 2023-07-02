@@ -9,7 +9,7 @@ function MealViewer(): JSX.Element {
 
   return (
     <>
-      {meal === null ? <RecipeDoesntExist /> : <MealComponent oneMeal={meal} />}
+      {meal === null ? <RecipeDoesntExist /> : <MealComponent meals={meal} />}
     </>
   )
 }

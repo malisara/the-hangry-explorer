@@ -87,10 +87,10 @@ describe('Meal component', () => {
     expect(remainingLsItem).toBe(meals[1].idMeal)
   })
 
-  test("OneMealDisplay component renders when 'oneMeal' is sent as prop", async () => {
+  test('renders detail view when one meal is sent as prop', async () => {
     render(
       <MemoryRouter>
-        <MealComponent oneMeal={detailMeal} />
+        <MealComponent meals={detailMeal} />
       </MemoryRouter>
     )
 

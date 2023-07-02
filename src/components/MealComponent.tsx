@@ -8,12 +8,11 @@ import { LS_KEY } from 'utils/constants'
 import { getSavedMealsIds } from 'utils/utils'
 
 type Props = {
-  meals?: Meal[] //todo meals or meal jsx
+  meals: Meal[] | Meal
   handleMealUnsave?: (mealId: string) => void
-  oneMeal?: Meal
 }
 
-function MealComponent({ meals, handleMealUnsave, oneMeal }: Props) {
+function MealComponent({ meals, handleMealUnsave }: Props): JSX.Element {
   const [savedMealsIds, setSavedMealsIds] = useState<string[]>(
     getSavedMealsIds()
   )
@@ -31,20 +30,18 @@ function MealComponent({ meals, handleMealUnsave, oneMeal }: Props) {
     }
   }
 
-  return meals ? (
+  return Array.isArray(meals) ? (
     <MealsDisplay
       meals={meals}
       onMealToggle={toggleMealSave}
       savedMeals={savedMealsIds}
     />
   ) : (
-    oneMeal && (
-      <OneMealDisplay
-        meal={oneMeal}
-        onMealToggle={toggleMealSave}
-        savedMeals={savedMealsIds}
-      />
-    )
+    <OneMealDisplay
+      meal={meals}
+      onMealToggle={toggleMealSave}
+      savedMeals={savedMealsIds}
+    />
   )
 }
 
