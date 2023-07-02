@@ -1,6 +1,6 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
+import { render, screen } from '@testing-library/react'
 import { expect } from 'vitest'
 
 import { detailMeal } from '../constants'

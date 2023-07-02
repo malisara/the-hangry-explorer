@@ -18,20 +18,8 @@ function OneMealDisplay({
   const [crossOver, sertCrossOver] = useState<boolean[]>([false])
 
   useEffect(() => {
-    setMealIngredients(createAllIngredientsArray(meal))
+    setMealIngredients(_createAllIngredientsArray(meal))
   }, [])
-
-  function createAllIngredientsArray(meal: Meal): string[] {
-    let allIngredients: string[] = []
-    meal.arrIngredients?.forEach((ingredient: string, index: number) => {
-      if (meal.arrMeasures && meal.arrMeasures[index]) {
-        allIngredients.push(meal.arrMeasures[index] + ' ' + ingredient)
-      } else {
-        allIngredients.push(ingredient)
-      }
-    })
-    return allIngredients
-  }
 
   useEffect(() => {
     //create an array of cross-over values and set them to false
@@ -84,6 +72,18 @@ function OneMealDisplay({
       </div>
     </div>
   )
+}
+
+function _createAllIngredientsArray(meal: Meal): string[] {
+  let allIngredients: string[] = []
+  meal.arrIngredients?.forEach((ingredient: string, index: number) => {
+    if (meal.arrMeasures && meal.arrMeasures[index]) {
+      allIngredients.push(meal.arrMeasures[index] + ' ' + ingredient)
+    } else {
+      allIngredients.push(ingredient)
+    }
+  })
+  return allIngredients
 }
 
 export default OneMealDisplay

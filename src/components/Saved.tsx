@@ -14,7 +14,7 @@ function Saved(): JSX.Element {
     getSavedMealsIds()
   )
 
-  function handleMealUnsave(mealId: string) {
+  function handleMealUnsave(mealId: string): void {
     if (savedMealsIds.includes(mealId)) {
       const updatedMealsIds = savedMealsIds.filter((id) => id !== mealId)
       setSavedMealsIds(updatedMealsIds)

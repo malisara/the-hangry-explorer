@@ -21,7 +21,7 @@ function Explore(): JSX.Element {
     setMeals(fetchResult)
   }
 
-  function resetSearchInput() {
+  function resetSearchInput(): void {
     setMeals(initialMeals)
     setSearchInput('')
     if (inputRef.current) {
@@ -67,7 +67,6 @@ function Explore(): JSX.Element {
       </div>
 
       {/* meals display */}
-
       {meals.length !== 0 ? (
         <MealComponent meals={meals} />
       ) : (

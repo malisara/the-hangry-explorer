@@ -9,7 +9,7 @@ import 'intersection-observer'
 import Home from '../../src/components/Home'
 
 describe('Homepage', () => {
-  test('renders the home page with the title and button', async () => {
+  test('renders the home page', async () => {
     render(
       <MemoryRouter>
         <Home />

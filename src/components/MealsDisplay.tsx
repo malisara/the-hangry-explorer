@@ -2,6 +2,7 @@ import { HeartIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Meal } from 'types/Meal'
+import { MEAL_DISPLAY_LIMIT } from 'utils/constants'
 
 type Props = {
   meals: Meal[]
@@ -10,12 +11,11 @@ type Props = {
 }
 
 function MealsDisplay({ meals, onMealToggle, savedMeals }: Props): JSX.Element {
-  const displayLimit = 10
-  const [visibleMeals, setVisibleMeals] = useState(displayLimit)
+  const [visibleMeals, setVisibleMeals] = useState(MEAL_DISPLAY_LIMIT)
 
   function displayMoreMeals(): void {
     setVisibleMeals((prevVisibleMeals) => {
-      return prevVisibleMeals + displayLimit
+      return prevVisibleMeals + MEAL_DISPLAY_LIMIT
     })
   }
 

@@ -17,7 +17,7 @@ function MealComponent({ meals, handleMealUnsave }: Props): JSX.Element {
     getSavedMealsIds()
   )
 
-  const toggleMealSave = (mealId: string) => {
+  function toggleMealSave(mealId: string): void {
     const updatedSavedMeals = savedMealsIds.includes(mealId)
       ? savedMealsIds.filter((id) => id !== mealId)
       : [...savedMealsIds, mealId]
