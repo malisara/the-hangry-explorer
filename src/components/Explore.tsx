@@ -2,9 +2,10 @@ import { useState, useRef } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
+import MealComponent from './MealComponent'
 import Title from './Title'
 import { Meal } from '../types/Meal'
-import MealComponent from './MealComponent'
+import { fetchMeals } from 'utils/utils'
 
 function Explore(): JSX.Element {
   const initialMeals = (useLoaderData() as Meal[]) ?? []
@@ -16,34 +17,8 @@ function Explore(): JSX.Element {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault()
-    await fetchMealsByMainIngredient(searchInput)
-  }
-
-  async function fetchMealsByMainIngredient(ingredient: string) {
-    try {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
-      )
-      if (response.ok) {
-        const json = await response.json()
-        if (json.meals) {
-          const parsedMeals = json.meals.map((mealObj: any) => {
-            return new Meal(
-              mealObj.idMeal,
-              mealObj.strMeal,
-              mealObj.strMealThumb
-            )
-          })
-          setMeals(parsedMeals)
-        } else {
-          setMeals([])
-        }
-      } else {
-        throw new Error('Failed to fetch meals')
-      }
-    } catch (error) {
-      throw error
-    }
+    const fetchResult = await fetchMeals(searchInput)
+    setMeals(fetchResult)
   }
 
   function resetSearchInput() {
