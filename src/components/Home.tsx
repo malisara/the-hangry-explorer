@@ -2,10 +2,15 @@ import { motion } from 'framer-motion'
 
 import HeroImage from '../assets/HeroImage.png'
 import ExploreMealsBtn from './FindMealBtn'
+import { useNavigation } from 'react-router-dom'
+import Spinner from './Spinner'
 
 function Home(): JSX.Element {
+  const navigation = useNavigation()
   return (
     <>
+      {navigation.state === 'loading' && <Spinner />}
+
       <div className="relative w-screen h-screen top-0">
         {/* Hero image */}
         <img className="w-full h-full object-cover" src={HeroImage} alt="" />

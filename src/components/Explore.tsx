@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigation } from 'react-router-dom'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
 import MealComponent from './MealComponent'
+import Spinner from './Spinner'
 import Title from './Title'
 import { Meal } from '../types/Meal'
 import { fetchMeals } from 'utils/utils'
@@ -12,6 +13,7 @@ function Explore(): JSX.Element {
   const [meals, setMeals] = useState<Meal[]>(initialMeals)
   const [searchInput, setSearchInput] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const navigation = useNavigation()
 
   async function handleFormSubmit(
     e: React.FormEvent<HTMLFormElement>
@@ -36,6 +38,7 @@ function Explore(): JSX.Element {
 
   return (
     <>
+      {navigation.state === 'loading' && <Spinner />}
       <Title title={'Explore Recipes'} />
       <div className="flex justify-center">
         <form
