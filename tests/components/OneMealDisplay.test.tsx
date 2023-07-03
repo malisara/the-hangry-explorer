@@ -1,6 +1,6 @@
 import React from 'react'
-import { MemoryRouter } from 'react-router-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { expect, vi } from 'vitest'
 
 import { detailMeal } from '../constants'

@@ -35,34 +35,34 @@ describe('Saved meals component', () => {
     localStorage.clear()
   })
 
-  test('renders the component', async () => {
+  test('renders the component', () => {
     render(<RouterProvider router={router} />)
 
-    const title = await screen.findByText('Saved Recipes')
+    const title = screen.getByText('Saved Recipes')
     expect(title).toBeInTheDocument()
   })
 
-  test('renders saved meals', async () => {
+  test('renders saved meals', () => {
     render(<RouterProvider router={router} />)
 
-    const meals = await screen.findAllByRole('img')
+    const meals = screen.getAllByRole('img')
     expect(meals.length).toBe(SAVED_MEALS.length)
   })
 
-  test('handles meal unsave', async () => {
+  test('handles meal unsave', () => {
     localStorage.setItem(LS_KEY, JSON.stringify(['Test1', 'Test2', 'Test3']))
     render(<RouterProvider router={router} />)
 
-    const mealsBeforeUnsave = await screen.findAllByRole('img')
+    const mealsBeforeUnsave = screen.getAllByRole('img')
     expect(mealsBeforeUnsave.length).toBe(SAVED_MEALS.length)
 
-    const unsaveBtn = await screen.findAllByTestId('save-meal-btn')
+    const unsaveBtn = screen.getAllByTestId('save-meal-btn')
     fireEvent.click(unsaveBtn[0])
 
-    const meals = await screen.findAllByRole('img')
+    const meals = screen.getAllByRole('img')
     expect(meals.length).toBe(SAVED_MEALS.length - 1)
 
-    const unsaveBtnAfter = await screen.findAllByTestId('save-meal-btn')
+    const unsaveBtnAfter = screen.getAllByTestId('save-meal-btn')
     expect(unsaveBtnAfter.length).toBe(unsaveBtn.length - 1)
   })
 
@@ -88,7 +88,7 @@ describe('Saved meals component', () => {
     const meals = screen.queryAllByRole('img')
     expect(meals.length).toBe(0)
 
-    const noMealsText = await screen.findByText('No meals saved yet')
+    const noMealsText = screen.getByText('No meals saved yet')
     expect(noMealsText).toBeInTheDocument()
   })
 })

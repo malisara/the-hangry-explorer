@@ -32,38 +32,38 @@ describe('Meal component', () => {
     localStorage.clear()
   })
 
-  test('renders limited amount of meals with "show more meals" button', async () => {
+  test('renders limited amount of meals with "show more meals" button', () => {
     render(
       <MemoryRouter>
         <MealComponent meals={meals} />
       </MemoryRouter>
     )
 
-    const mealImages = await screen.findAllByRole('img')
+    const mealImages = screen.getAllByRole('img')
     expect(mealImages).toHaveLength(displayLimitMeals)
 
-    const loadMoreBtn = await screen.findByText('Show more meals')
+    const loadMoreBtn = screen.getByText('Show more meals')
     expect(loadMoreBtn).toBeInTheDocument()
   })
 
-  test('displays more meals when "show more meals" button is clicked', async () => {
+  test('displays more meals when "show more meals" button is clicked', () => {
     render(
       <MemoryRouter>
         <MealComponent meals={meals} />
       </MemoryRouter>
     )
 
-    const loadMoreBtn = await screen.findByText('Show more meals')
+    const loadMoreBtn = screen.getByText('Show more meals')
     fireEvent.click(loadMoreBtn)
 
-    const mealImages = await screen.findAllByRole('img')
+    const mealImages = screen.getAllByRole('img')
     expect(mealImages).toHaveLength(meals.length)
 
     const loadMoreBtnWhenNoMoreMeals = screen.queryByText('Show more meals')
     expect(loadMoreBtnWhenNoMoreMeals).not.toBeInTheDocument()
   })
 
-  test('handles saving and unsaving meal to/from the LS', async () => {
+  test('handles saving and unsaving meal to/from the LS', () => {
     render(
       <MemoryRouter>
         <MealComponent meals={meals} />
@@ -87,17 +87,17 @@ describe('Meal component', () => {
     expect(remainingLsItem).toBe(meals[1].idMeal)
   })
 
-  test('renders detail view when one meal is sent as prop', async () => {
+  test('renders detail view when one meal is sent as prop', () => {
     render(
       <MemoryRouter>
         <MealComponent meals={detailMeal} />
       </MemoryRouter>
     )
 
-    const mealImages = await screen.findAllByRole('img')
+    const mealImages = screen.getAllByRole('img')
     expect(mealImages).toHaveLength(1)
 
-    const instructions = await screen.findByText('fake instructions')
+    const instructions = screen.getByText('fake instructions')
     expect(instructions).toBeInTheDocument()
   })
 })

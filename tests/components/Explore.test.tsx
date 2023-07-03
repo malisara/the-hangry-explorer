@@ -58,60 +58,58 @@ describe('Explore component', () => {
     mockedFetch.mockReset()
   })
 
-  test('renders the explore component', async () => {
+  test('renders the explore component', () => {
     render(<RouterProvider router={router} />)
 
-    const title = await screen.findByText('Explore Recipes')
+    const title = screen.getByText('Explore Recipes')
     expect(title).toBeInTheDocument()
 
-    const searchInput = await screen.findByRole('form')
+    const searchInput = screen.getByRole('form')
     expect(searchInput).toBeInTheDocument()
   })
 
-  test('displays all meals on component render', async () => {
+  test('displays all meals on component render', () => {
     render(<RouterProvider router={router} />)
 
-    const searchText = await screen.findByText('All recipes')
+    const searchText = screen.getByText('All recipes')
     expect(searchText).toBeInTheDocument()
 
-    const displayedMeals = await screen.findAllByRole('img')
+    const displayedMeals = screen.getAllByRole('img')
     expect(displayedMeals).toHaveLength(INITIAL_MEAL.length)
   })
 
-  test('input field and subtitle update after submitting the form', async () => {
+  test('input field and subtitle update after submitting the form', () => {
     render(<RouterProvider router={router} />)
     const userInput = 'chicken'
-    const searchInput = (await screen.findByPlaceholderText(
+    const searchInput = screen.getByPlaceholderText(
       'Search by main ingredient'
-    )) as HTMLInputElement
+    ) as HTMLInputElement
     fireEvent.change(searchInput, { target: { value: userInput } })
     expect(searchInput.value).toBe(userInput)
 
-    const subtitle = await screen.findByText(`"${userInput}"`)
+    const subtitle = screen.getByText(`"${userInput}"`)
     expect(subtitle).toBeInTheDocument()
     const textAllMeals = screen.queryAllByAltText('All recipes')
     expect(textAllMeals).toHaveLength(0)
   })
 
-  test('fetch is called with the correct URL', async () => {
+  test('fetch is called with the correct URL', () => {
     render(<RouterProvider router={router} />)
     const userInput = 'chicken'
-    const searchInput = (await screen.findByPlaceholderText(
+    const searchInput = screen.getByPlaceholderText(
       'Search by main ingredient'
-    )) as HTMLInputElement
+    ) as HTMLInputElement
 
     mockedFetch.mockResolvedValueOnce(createFetchResponse(meals))
 
-    await act(() => {
-      fireEvent.change(searchInput, { target: { value: userInput } })
-      fireEvent.submit(screen.getByRole('form'))
-    })
+    fireEvent.change(searchInput, { target: { value: userInput } })
+    fireEvent.submit(screen.getByRole('form'))
 
     expect(mockedFetch).toHaveBeenCalledWith(
       `https://www.themealdb.com/api/json/v1/1/filter.php?i=${userInput}`
     )
 
-    const displayedMeals = await screen.findAllByRole('img')
+    const displayedMeals = screen.getAllByRole('img')
     expect(displayedMeals).toHaveLength(meals.meals.length)
   })
 
@@ -119,16 +117,14 @@ describe('Explore component', () => {
     render(<RouterProvider router={router} />)
 
     mockedFetch.mockResolvedValueOnce(createFetchResponse(emptyMeals))
-    const searchInput = (await screen.findByPlaceholderText(
+    const searchInput = screen.getByPlaceholderText(
       'Search by main ingredient'
-    )) as HTMLInputElement
+    ) as HTMLInputElement
 
-    await act(() => {
-      fireEvent.change(searchInput, { target: { value: 'apple' } })
-      fireEvent.submit(screen.getByRole('form'))
-    })
+    fireEvent.change(searchInput, { target: { value: 'apple' } })
+    fireEvent.submit(screen.getByRole('form'))
 
-    const notFoundText = screen.getByText(
+    const notFoundText = await screen.findByText(
       "Sorry, we couldn't find any recipes mathching your search."
     )
     expect(notFoundText).toBeInTheDocument()
@@ -143,9 +139,9 @@ describe('Explore component', () => {
     render(<RouterProvider router={router} />)
 
     mockedFetch.mockResolvedValueOnce(createFetchResponse(emptyMeals))
-    const searchInput = (await screen.findByPlaceholderText(
+    const searchInput = screen.getByPlaceholderText(
       'Search by main ingredient'
-    )) as HTMLInputElement
+    ) as HTMLInputElement
 
     await act(() => {
       fireEvent.change(searchInput, { target: { value: 'apple' } })
@@ -158,7 +154,7 @@ describe('Explore component', () => {
     const resetButton = screen.getByText('Reset search')
     fireEvent.click(resetButton)
 
-    const displayedMeals = await screen.findAllByRole('img')
+    const displayedMeals = screen.getAllByRole('img')
     expect(displayedMeals).toHaveLength(INITIAL_MEAL.length)
   })
 })

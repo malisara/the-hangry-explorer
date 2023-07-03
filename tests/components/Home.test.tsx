@@ -1,31 +1,38 @@
 import React from 'react'
-import { MemoryRouter } from 'react-router-dom'
+import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import { render, screen } from '@testing-library/react'
 import { describe, test } from 'vitest'
 import 'intersection-observer'
 //Framer motion uses IntersectionObserver
 //but it isn't available by default
 
+const routes = [
+  //useNavigation() doesn't work with memory router
+  {
+    path: '/',
+    element: <Home />
+  }
+]
+const router = createMemoryRouter(routes, {
+  initialEntries: ['/']
+})
+
 import Home from '../../src/components/Home'
 
 describe('Homepage', () => {
-  test('renders the home page', async () => {
-    render(
-      <MemoryRouter>
-        <Home />
-      </MemoryRouter>
-    )
+  test('renders the home page', () => {
+    render(<RouterProvider router={router} />)
 
-    const pageTitle = await screen.findByText('THE HANGRY EXPLORER')
+    const pageTitle = screen.getByText('THE HANGRY EXPLORER')
     expect(pageTitle).toBeInTheDocument()
 
-    const heroImage = await screen.findByRole('img')
+    const heroImage = screen.getByRole('img')
     expect(heroImage).toBeInTheDocument()
 
-    const button = await screen.findByRole('button')
+    const button = screen.getByRole('button')
     expect(button).toBeInTheDocument()
 
-    const link = await screen.findByRole('link')
+    const link = screen.getByRole('link')
     expect(link.getAttribute('href')).toEqual('/explore-recipes')
   })
 })
