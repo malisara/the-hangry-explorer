@@ -5,7 +5,7 @@ const container = document.getElementById('root') as HTMLDivElement
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import Root from './routes/Root'
 
 import Explore from './components/Explore'
@@ -17,9 +17,9 @@ import savedMealsLoader from './loaders/savedMealsLoader'
 import singleMealLoader from 'loaders/singleMealLoader'
 import NotFound from 'components/NotFound'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    path: '/the-hangry-explorer/',
+    path: '/',
     element: <Root />,
     errorElement: <NotFound />,
     children: [
