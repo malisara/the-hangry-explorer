@@ -4,7 +4,11 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 // https://vitejs.dev/config https://vitest.dev/config
 export default defineConfig({
+  base: '/the-hangry-explorer/',
   plugins: [react(), tsconfigPaths()],
+  build: {
+    outDir: 'docs'
+  },
   test: {
     globals: true,
     environment: 'happy-dom',
