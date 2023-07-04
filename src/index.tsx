@@ -19,7 +19,7 @@ import NotFound from 'components/NotFound'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/the-hangry-explorer/',
     element: <Root />,
     errorElement: <NotFound />,
     children: [
